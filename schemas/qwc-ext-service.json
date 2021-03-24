@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/qwc-services/qwc-ext-service/raw/master/schemas/qwc-ext-service.json",
+  "title": "QWC External Link Service",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "title": "JSON Schema",
+      "description": "Reference to JSON schema of this config",
+      "type": "string",
+      "format": "uri",
+      "default": "https://github.com/qwc-services/qwc-ext-service/raw/master/schemas/qwc-ext-service.json"
+    },
+    "service": {
+      "title": "Service name",
+      "type": "string",
+      "const": "data"
+    },
+    "config": {
+      "title": "Config options",
+      "type": "object",
+      "properties": {
+      }
+    },
+    "resources": {
+      "title": "Resources",
+      "type": "object",
+      "properties": {
+        "external_links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "url"
+            ]
+          }
+        }
+      },
+      "required": [
+        "external_links"
+      ]
+    }
+  },
+  "required": [
+    "service",
+    "config",
+    "resources"
+  ]
+}
