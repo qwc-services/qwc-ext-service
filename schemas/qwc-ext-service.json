@@ -14,7 +14,7 @@
     "service": {
       "title": "Service name",
       "type": "string",
-      "const": "data"
+      "const": "ext"
     },
     "config": {
       "title": "Config options",
