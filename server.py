@@ -69,7 +69,7 @@ class ExternalLinkProxy(Resource):
         for key in query:
             query[key] = query[key].replace('$tenant$', tenant)
         query.update(args)
-        parts._replace(query=parts)
+        parts = parts._replace(query=parse.urlencode(query))
         link = parts.geturl()
         api.logger.info("Proxying " + link)
         return link
