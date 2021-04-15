@@ -26,24 +26,26 @@ auth = auth_manager(app, api)
 # create tenant handler
 tenant_handler = TenantHandler(app.logger)
 
-@api.route('/<program>')
+
+@api.route('/<program>/', defaults={'path': ''})
+@api.route('/<program>/<path:path>')
 @api.response(404, 'Link not found or permission error')
 class ExternalLinkProxy(Resource):
 
     @api.doc('get_link')
     @optional_auth
-    def get(self, program):
-        link = self.__get_link(get_auth_user(), program, request.args)
+    def get(self, program, path):
+        link = self.__get_link(get_auth_user(), program, path, request.args)
         req = requests.get(link, stream=True, timeout=10)
         return self.__get_response(req)
 
-    def post(self, program):
-        link = self.__get_link(get_auth_user(), program, request.args)
+    def post(self, program, path):
+        link = self.__get_link(get_auth_user(), program, path, request.args)
         headers={'content-type': request.headers['content-type']}
         req = requests.post(link, stream=True, timeout=30, data=request.get_data(), headers=headers)
         return self.__get_response(req)
 
-    def __get_link(self, identity, program, args):
+    def __get_link(self, identity, program, path, args):
         tenant = tenant_handler.tenant()
         permissions_handler = PermissionsReader(tenant, app.logger)
         permitted_resources = permissions_handler.resource_permissions(
@@ -70,6 +72,10 @@ class ExternalLinkProxy(Resource):
             query[key] = query[key].replace('$tenant$', tenant)
         query.update(args)
         parts = parts._replace(query=parse.urlencode(query))
+
+        if path:
+            parts = parts._replace(path=os.path.dirname(parts.path) + "/" + path)
+
         link = parts.geturl()
         api.logger.info("Proxying " + link)
         return link
@@ -78,7 +84,6 @@ class ExternalLinkProxy(Resource):
         response = Response(stream_with_context(req.iter_content(chunk_size=1024)), status=req.status_code)
         response.headers['content-type'] = req.headers['content-type']
         return response
-
 
 
 """ readyness probe endpoint """
