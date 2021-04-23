@@ -39,6 +39,8 @@ class ExternalLinkProxy(Resource):
         req = requests.get(link, stream=True, timeout=10)
         return self.__get_response(req)
 
+    @api.doc('post_link')
+    @optional_auth
     def post(self, program, path):
         link = self.__get_link(get_auth_user(), program, path, request.args)
         headers={'content-type': request.headers['content-type']}
