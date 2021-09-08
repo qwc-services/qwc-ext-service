@@ -1,5 +1,5 @@
 [![](https://github.com/qwc-services/qwc-ext-service/workflows/build/badge.svg)](https://github.com/qwc-services/qwc-ext-service/actions)
-[![](https://img.shields.io/docker/pulls/sourcepole/qwc-ext-service)](https://hub.docker.com/r/sourcepole/qwc-ext-service)
+[![docker](https://img.shields.io/docker/v/sourcepole/qwc-ext-service?label=Docker%20image&sort=semver)](https://hub.docker.com/r/sourcepole/qwc-ext-service)
 
 QWC external link service
 =========================
