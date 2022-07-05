@@ -35,19 +35,25 @@ class ExternalLinkProxy(Resource):
     @api.doc('get_link')
     @optional_auth
     def get(self, program, path):
-        link = self.__get_link(get_auth_user(), program, path, request.args)
-        req = requests.get(link, stream=True, timeout=10)
+        config_handler = RuntimeConfig("ext", app.logger)
+        config = config_handler.tenant_config(tenant_handler.tenant())
+
+        link = self.__get_link(config, get_auth_user(), program, path, request.args)
+        req = requests.get(link, stream=True, timeout=config.get('get_link_timeout', 10))
         return self.__get_response(req)
 
     @api.doc('post_link')
     @optional_auth
     def post(self, program, path):
-        link = self.__get_link(get_auth_user(), program, path, request.args)
+        config_handler = RuntimeConfig("ext", app.logger)
+        config = config_handler.tenant_config(tenant_handler.tenant())
+
+        link = self.__get_link(config, get_auth_user(), program, path, request.args)
         headers={'content-type': request.headers['content-type']}
-        req = requests.post(link, stream=True, timeout=30, data=request.form, headers=headers)
+        req = requests.post(link, stream=True, timeout=config.get('post_link_timeout', 30), data=request.form, headers=headers)
         return self.__get_response(req)
 
-    def __get_link(self, identity, program, path, args):
+    def __get_link(self, config, identity, program, path, args):
         tenant = tenant_handler.tenant()
         permissions_handler = PermissionsReader(tenant, app.logger)
         permitted_resources = permissions_handler.resource_permissions(
@@ -57,8 +63,6 @@ class ExternalLinkProxy(Resource):
             app.logger.warning("Identity %s is not allowed to open link for program %s" % (identity, program))
             api.abort(404, 'Unable to open link')
 
-        config_handler = RuntimeConfig("ext", app.logger)
-        config = config_handler.tenant_config(tenant_handler.tenant())
         program_map = config.resources().get("external_links", [])
         link = None
         for entry in program_map:

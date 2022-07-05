@@ -20,6 +20,14 @@
       "title": "Config options",
       "type": "object",
       "properties": {
+        "get_link_timeout": {
+          "description": "Timeout for get link requests, in seconds. Default: 10.",
+          "type": "number"
+        },
+        "post_link_timeout": {
+          "description": "Timeout for post link requests, in seconds. Default: 30.",
+          "type": "number"
+        }
       }
     },
     "resources": {
