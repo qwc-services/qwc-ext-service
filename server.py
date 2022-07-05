@@ -88,7 +88,6 @@ class ExternalLinkProxy(Resource):
 
     def __get_response(self, req):
         response = Response(stream_with_context(req.iter_content(chunk_size=1024)), status=req.status_code)
-        response.headers['content-type'] = req.headers['content-type']
         return response
 
 
