@@ -88,6 +88,10 @@ class ExternalLinkProxy(Resource):
 
     def __get_response(self, req):
         response = Response(stream_with_context(req.iter_content(chunk_size=1024)), status=req.status_code)
+        # Inherit content-type and content-disposition from response of proxied request
+        for name in ['content-type', 'content-disposition']:
+            if name in req.headers:
+                response.headers[name] = req.headers[name]
         return response
 
 
