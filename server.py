@@ -76,6 +76,7 @@ class ExternalLinkProxy(Resource):
         query = dict(parse.parse_qsl(parts.query))
         for key in query:
             query[key] = query[key].replace('$tenant$', tenant)
+            query[key] = query[key].replace('$username$', identity)
         query.update(args)
         parts = parts._replace(query=parse.urlencode(query))
 

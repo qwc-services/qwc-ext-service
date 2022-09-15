@@ -36,7 +36,7 @@ Example:
   "service": "ext",
   "config": {
     "program_map": {
-      "prog1": "http://my.secret.site/path/?tenant=$tenant$",
+      "prog1": "http://my.secret.site/path/?tenant=$tenant$&user=$username$",
     }
   },
   "resources": {
