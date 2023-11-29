@@ -5,7 +5,7 @@ from urllib import parse
 from flask import Flask, jsonify, request, Response, stream_with_context
 from flask_restx import Api, Resource
 
-from qwc_services_core.auth import auth_manager, optional_auth, get_auth_user
+from qwc_services_core.auth import auth_manager, optional_auth, get_identity, get_username
 from qwc_services_core.permissions_reader import PermissionsReader
 from qwc_services_core.runtime_config import RuntimeConfig
 from qwc_services_core.tenant_handler import TenantHandler
@@ -38,7 +38,7 @@ class ExternalLinkProxy(Resource):
         config_handler = RuntimeConfig("ext", app.logger)
         config = config_handler.tenant_config(tenant_handler.tenant())
 
-        link = self.__get_link(config, get_auth_user(), program, path, request.args)
+        link = self.__get_link(config, get_identity(), program, path, request.args)
         req = requests.get(link, stream=True, timeout=config.get('get_link_timeout', 10))
         return self.__get_response(req)
 
@@ -48,7 +48,7 @@ class ExternalLinkProxy(Resource):
         config_handler = RuntimeConfig("ext", app.logger)
         config = config_handler.tenant_config(tenant_handler.tenant())
 
-        link = self.__get_link(config, get_auth_user(), program, path, request.args)
+        link = self.__get_link(config, get_identity(), program, path, request.args)
         headers={'content-type': request.headers['content-type']}
         req = requests.post(link, stream=True, timeout=config.get('post_link_timeout', 30), data=request.form, headers=headers)
         return self.__get_response(req)
@@ -76,7 +76,7 @@ class ExternalLinkProxy(Resource):
         query = dict(parse.parse_qsl(parts.query))
         for key in query:
             query[key] = query[key].replace('$tenant$', tenant)
-            query[key] = query[key].replace('$username$', identity or "")
+            query[key] = query[key].replace('$username$', get_username(identity) or "")
         query.update(args)
         parts = parts._replace(query=parse.urlencode(query))
 
