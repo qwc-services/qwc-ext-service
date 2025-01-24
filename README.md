@@ -50,18 +50,6 @@ Example:
 Development
 -----------
 
-Create a virtual environment:
-
-    python3 -m venv .venv
-
-Activate virtual environment:
-
-    source .venv/bin/activate
-
-Install requirements:
-
-    pip install -r requirements.txt
-
 Set the `CONFIG_PATH` environment variable to the path containing the service config and permission files when starting this service (default: `config`).
 
     export CONFIG_PATH=../qwc-docker/volumes/config
@@ -70,6 +58,6 @@ Configure environment:
 
     echo FLASK_ENV=development >.flaskenv
 
-Start local service:
+Install dependencies and run service:
 
-    python src/server.py
+    uv run src/server.py
