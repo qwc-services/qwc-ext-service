@@ -4,10 +4,7 @@
 QWC external link service
 =========================
 
-API documentation:
-
-    http://localhost:5023/api/
-
+Proxy service for external application links, identified by a program name, with access control.
 
 Setup
 -----
@@ -34,30 +31,38 @@ Example:
 {
   "$schema": "https://raw.githubusercontent.com/qwc-services/qwc-ext-service/master/schemas/qwc-ext-service.json",
   "service": "ext",
-  "config": {
-    "program_map": {
-      "prog1": "http://my.secret.site/path/?tenant=$tenant$&user=$username$",
-    }
-  },
   "resources": {
-    "external_program_names": [
-      "prog1"
+    "external_links": [
+      {"name": "prog1", "url": "http://my.secret.site/path/?tenant=$tenant$&user=$username$"}
     ]
   }
 }
 ```
 
-Development
+Run locally
 -----------
 
-Set the `CONFIG_PATH` environment variable to the path containing the service config and permission files when starting this service (default: `config`).
+Install dependencies and run:
 
-    export CONFIG_PATH=../qwc-docker/volumes/config
+    # Setup venv
+    uv venv .venv
 
-Configure environment:
-
-    echo FLASK_ENV=development >.flaskenv
-
-Install dependencies and run service:
-
+    export CONFIG_PATH=<CONFIG_PATH>
     uv run src/server.py
+
+To use configs from a `qwc-docker` setup, set `CONFIG_PATH=<...>/qwc-docker/volumes/config`.
+
+Set `FLASK_DEBUG=1` for additional debug output.
+
+Set `FLASK_RUN_PORT=<port>` to change the default port (default: `5000`).
+
+API documentation:
+
+    http://localhost:$FLASK_RUN_PORT/api/
+
+Docker usage
+------------
+
+The Docker image is published on [Dockerhub](https://hub.docker.com/r/sourcepole/qwc-ext-service).
+
+See sample [docker-compose.yml](https://github.com/qwc-services/qwc-docker/blob/master/docker-compose-example.yml) of [qwc-docker](https://github.com/qwc-services/qwc-docker).
