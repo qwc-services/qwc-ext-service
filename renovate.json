@@ -8,5 +8,12 @@
   },
   "ignorePaths": [
     "**/requirements.txt"
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["sourcepole/qwc-uwsgi-base"],
+      "versioning": "loose"
+    }
   ]
 }
