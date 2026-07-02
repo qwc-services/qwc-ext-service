@@ -412,8 +412,8 @@ requires-dist = [
     { name = "flask", specifier = "~=3.1.0" },
     { name = "flask-jwt-extended", specifier = "~=4.7.0" },
     { name = "flask-restx", specifier = "~=1.3.0" },
-    { name = "qwc-services-core", specifier = "~=1.5.0" },
-    { name = "requests", specifier = "~=2.32.0" },
+    { name = "qwc-services-core", specifier = "~=1.6.0" },
+    { name = "requests", specifier = "~=2.34.2" },
     { name = "werkzeug", specifier = "~=3.1.0" },
 ]
 
@@ -422,11 +422,11 @@ dev = [{ name = "python-dotenv", specifier = ">=1.0.1" }]
 
 [[package]]
 name = "qwc-services-core"
-version = "1.5.2"
+version = "1.6.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/52/dd/341d7b30ad943255d8ef41f18f47a8f735dcc4c84145c346b2b8bee8f48c/qwc_services_core-1.5.2.tar.gz", hash = "sha256:c1b8ac16663a6be3d85267b26665cb681da0b4ef317a17c79a0f8a5523e08f63", size = 17624, upload-time = "2026-01-29T09:02:07.782Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/57/24/2f4cf0dae25be6ba0e424ed61dc67e17dcec2ed12cfa5f419d70abf12a58/qwc_services_core-1.6.0.tar.gz", hash = "sha256:d7a3424ba126e50cf5a6c6e8ad7e52266043356a87df52e8f08e483fa271bb8d", size = 18326, upload-time = "2026-07-02T08:56:04.829Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/75/31/48de13bdb3e5c7266a54067c2987ee6b727f694dfbddb56f3e27f0c3fa02/qwc_services_core-1.5.2-py3-none-any.whl", hash = "sha256:1486702ddebc7847e6801dd0d923d55490a7fdbfdc2661b9e74f9ff80c48e756", size = 18347, upload-time = "2026-01-29T09:02:06.88Z" },
+    { url = "https://files.pythonhosted.org/packages/ff/56/ce090a689861090041b58e8bcbf27931765fb8432183f4cab8ded5a8711d/qwc_services_core-1.6.0-py3-none-any.whl", hash = "sha256:d69d5351ef3f66409bfa1232d5b3299829e5d02fd757e6fa3c9007a5e166733b", size = 18889, upload-time = "2026-07-02T08:56:03.786Z" },
 ]
 
 [[package]]
@@ -446,7 +446,7 @@ wheels = [
 
 [[package]]
 name = "requests"
-version = "2.32.5"
+version = "2.34.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "certifi" },
@@ -454,9 +454,9 @@ dependencies = [
     { name = "idna" },
     { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c9/74/b3ff8e6c8446842c3f5c837e9c3dfcfe2018ea6ecef224c710c85ef728f4/requests-2.32.5.tar.gz", hash = "sha256:dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf", size = 134517, upload-time = "2025-08-18T20:46:02.573Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz", hash = "sha256:f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed", size = 142856, upload-time = "2026-05-14T19:25:27.735Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1e/db/4254e3eabe8020b458f1a747140d32277ec7a271daf1d235b70dc0b4e6e3/requests-2.32.5-py3-none-any.whl", hash = "sha256:2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6", size = 64738, upload-time = "2025-08-18T20:46:00.542Z" },
+    { url = "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl", hash = "sha256:2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0", size = 73075, upload-time = "2026-05-14T19:25:26.443Z" },
 ]
 
 [[package]]
