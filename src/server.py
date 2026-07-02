@@ -3,8 +3,9 @@ import requests
 from urllib import parse
 
 from flask import Flask, jsonify, request, Response, stream_with_context
-from flask_restx import Api, Resource
+from flask_restx import Resource
 
+from qwc_services_core.api import Api
 from qwc_services_core.auth import auth_manager, optional_auth, get_identity, get_username
 from qwc_services_core.permissions_reader import PermissionsReader
 from qwc_services_core.runtime_config import RuntimeConfig
